@@ -2,14 +2,13 @@ package com.planet.dashboard.service;
 
 import com.planet.dashboard.dto.LoginForm;
 import com.planet.dashboard.entity.User;
-import com.planet.dashboard.entity.UserId;
 import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Service
@@ -20,27 +19,21 @@ public class LoginServiceImpl implements LoginService{
     private final UserRepository userRepository;
 
     @Override
-    public String login(HttpServletRequest request, LoginForm form) {
+    public String login(HttpServletRequest request, LoginForm form, Model model) {
 
-        UserId userId = new UserId(form.getId(), form.getPassword());
-        log.info("userId : {} ", userId);
-        if(validateForm(userId)){
-            addSession(request,userId);
+        if(isMember(form)){
+            SessionManager.addSession(request.getSession(), form);
             return "index";
         }
+        model.addAttribute("loginFail",true);
         return "login";
     }
 
-    private boolean validateForm(UserId userId) {
-        Optional<User> foundUser = userRepository.findById(userId);
+    private boolean isMember(LoginForm loginForm) {
+        Optional<User> foundUser = userRepository.findById(loginForm.getEmail());
         return foundUser.isPresent();
     }
 
-    @Override
-    public void addSession(HttpServletRequest request , UserId userId) {
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionManager.SESSION_ID , userId );
-    }
 
 
 }

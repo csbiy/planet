@@ -2,23 +2,25 @@ package com.planet.dashboard.service;
 
 import com.planet.dashboard.dto.LoginForm;
 import com.planet.dashboard.entity.User;
-import com.planet.dashboard.entity.UserId;
 import com.planet.dashboard.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 class LoginServiceImplTest {
+
+    @Mock
+    Model model;
 
     @Autowired UserRepository userRepository;
     @Autowired LoginService loginService;
@@ -28,20 +30,23 @@ class LoginServiceImplTest {
 
         //given
         MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
-        UserId userId = new UserId("tester", "1234");
+        String email = "test@naver.com";
+        String pw = "testpw";
         User user = User.builder()
-                .userId(userId)
+                .email(email)
+                .password(pw)
                 .createdAt(LocalDateTime.now())
                 .build();
         userRepository.save(user);
-
+        LoginForm loginForm = new LoginForm(email, pw);
         //when
-        String redirectPath = loginService.login(mockHttpServletRequest, new LoginForm(userId.getUserId(), userId.getPassword()));
+        String redirectPath = loginService.login(mockHttpServletRequest, loginForm , model);
 
         //then
         Assertions.assertThat(redirectPath).isEqualTo("index");
-        UserId value = (UserId) mockHttpServletRequest.getSession().getAttribute(SessionManager.SESSION_ID);
-        Assertions.assertThat(value).isEqualTo(userId);
+        LoginForm value = (LoginForm) mockHttpServletRequest.getSession().getAttribute(SessionManager.SESSION_ID);
+        Assertions.assertThat(value).isEqualTo(loginForm);
+        Assertions.assertThat(model.getAttribute("loginFail")).isNull();
 
 
     }

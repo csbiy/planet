@@ -10,8 +10,12 @@
 
 <form th:object="${loginForm}" method="post" action="/login">
 
-    <p>id : <input type="text" th:field="*{id}"></p>
+    <p>id : <input type="text" th:field="*{email}"></p>
+    <div th:errors="*{email}"> </div>
     <p>password: <input type="password" th:field="*{password}"></p>
+    <div th:errors="*{password}"></div>
+
+    <div th:if="${loginFail}"th:text="#{login.fail}"></div>
     <button type="submit">submit</button>
 </form>
 

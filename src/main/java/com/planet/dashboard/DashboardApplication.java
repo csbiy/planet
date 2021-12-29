@@ -1,7 +1,7 @@
 package com.planet.dashboard;
 
+import com.planet.dashboard.auth.EmailSender;
 import com.planet.dashboard.entity.User;
-import com.planet.dashboard.entity.UserId;
 import com.planet.dashboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -22,10 +22,12 @@ public class DashboardApplication {
 	@PostConstruct
 	void addAdminUser(){
 		User admin = User.builder()
-				.userId(new UserId("admin", "1234"))
+				.email("test@naver.com")
+				.password("1234")
 				.createdAt(LocalDateTime.now())
 				.build();
 		userRepository.save(admin);
+
 	}
 
 }
