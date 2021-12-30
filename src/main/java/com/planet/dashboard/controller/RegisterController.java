@@ -1,8 +1,6 @@
 package com.planet.dashboard.controller;
 
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.planet.dashboard.auth.EmailAuth;
-import com.planet.dashboard.dto.RegisterForm;
+import com.planet.dashboard.controller.request.dto.RegisterForm;
 import com.planet.dashboard.service.RegisterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +18,7 @@ public class RegisterController implements CrudController<RegisterForm> {
 
 
     private final RegisterService registerService;
-    private final EmailAuth emailAuth;
+
 
     @GetMapping
     public String read(Model model) {
@@ -39,13 +37,6 @@ public class RegisterController implements CrudController<RegisterForm> {
         return registerService.register(src,model);
     }
 
-    @GetMapping("/email-validate")
-    @ResponseBody
-    public String validateEmail(@RequestParam String email){
-        log.info("validate target email : {}", email);
-        emailAuth.validate(email);
-        return "ok";
-    }
 
     @Override
     public String update(RegisterForm src) {
@@ -60,4 +51,7 @@ public class RegisterController implements CrudController<RegisterForm> {
     private boolean isSamePw(String pw1 , String pw2){
         return pw1.equals(pw2);
     }
+
+
+
 }

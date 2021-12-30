@@ -1,6 +1,6 @@
 package com.planet.dashboard.service;
 
-import com.planet.dashboard.dto.LoginForm;
+import com.planet.dashboard.controller.request.dto.LoginForm;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;

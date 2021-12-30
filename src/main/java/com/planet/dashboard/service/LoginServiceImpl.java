@@ -1,6 +1,7 @@
 package com.planet.dashboard.service;
 
-import com.planet.dashboard.dto.LoginForm;
+import com.planet.dashboard.SessionManager;
+import com.planet.dashboard.controller.request.dto.LoginForm;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class LoginServiceImpl implements LoginService{
     public String login(HttpServletRequest request, LoginForm form, Model model) {
 
         if(isMember(form)){
-            SessionManager.addSession(request.getSession(), form);
+            SessionManager.addSession(request.getSession(),SessionManager.SESSION_ID, form);
             return "index";
         }
         model.addAttribute("loginFail",true);

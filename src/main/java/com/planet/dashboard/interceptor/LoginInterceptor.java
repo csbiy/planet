@@ -1,6 +1,6 @@
 package com.planet.dashboard.interceptor;
 
-import com.planet.dashboard.service.SessionManager;
+import com.planet.dashboard.SessionManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 

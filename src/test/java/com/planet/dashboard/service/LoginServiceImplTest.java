@@ -1,6 +1,7 @@
 package com.planet.dashboard.service;
 
-import com.planet.dashboard.dto.LoginForm;
+import com.planet.dashboard.SessionManager;
+import com.planet.dashboard.controller.request.dto.LoginForm;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import org.assertj.core.api.Assertions;

@@ -1,6 +1,6 @@
 package com.planet.dashboard.entity;
 
-import com.planet.dashboard.dto.RegisterForm;
+import com.planet.dashboard.controller.request.dto.RegisterForm;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -12,6 +12,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Properties;
+
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
@@ -23,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
         WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/index","/login","/register/**","/css/**","/js/**")
+                .excludePathPatterns("/index","/login","/register/**","/css/**","/js/**","/vendor/**")
                 .order(1);
     }
 
@@ -35,7 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-    //TODO
     @Bean
     public JavaMailSender getJavaMailSender(){
         JavaMailSenderImpl config = new JavaMailSenderImpl();
@@ -43,6 +44,12 @@ public class WebConfig implements WebMvcConfigurer {
         config.setPort(mailSender.getEmailPlatform().getPort());
         config.setPassword(mailSender.getPassword());
         config.setUsername(mailSender.getId());
+        Properties props = config.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.trust", mailSender.getEmailPlatform().getHost());
+        props.put("mail.debug", "true");
         return config;
     }
 }

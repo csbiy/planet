@@ -1,4 +1,4 @@
-package com.planet.dashboard.dto;
+package com.planet.dashboard.controller.request.dto;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +8,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LoginFormTest {
 
