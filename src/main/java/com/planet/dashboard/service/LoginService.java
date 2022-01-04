@@ -9,4 +9,5 @@ public interface LoginService {
 
     String login(HttpServletRequest request, LoginForm form , Model model);
 
+    void logout(HttpServletRequest request );
 }

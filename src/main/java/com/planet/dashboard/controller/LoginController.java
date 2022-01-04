@@ -17,24 +17,29 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/login")
 @Slf4j
 public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping
+    @GetMapping("/login")
     public String addForm(Model model){
         model.addAttribute("loginForm",new LoginForm());
         return "login";
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public String login(@Validated @ModelAttribute(name = "loginForm") LoginForm loginForm ,  BindingResult bindingResult , Model model , HttpServletRequest request ){
         log.info("login info :{}",loginForm);
         if(bindingResult.hasErrors()) {
             return "login";
         }
         return loginService.login(request,loginForm,model);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        loginService.logout(request);
+        return "redirect:/login";
     }
 }

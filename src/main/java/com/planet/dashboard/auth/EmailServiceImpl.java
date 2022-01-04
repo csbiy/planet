@@ -2,14 +2,11 @@ package com.planet.dashboard.auth;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-import javax.mail.SendFailedException;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @Slf4j
@@ -32,19 +29,14 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public String sendTemplateMessage(String to) {
 
-        String authNum;
-        try{
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(senderInfo.getId());
-            message.setTo(to);
-            message.setSubject(templateInfo.getTemplateMailTitle());
-            authNum = generateAuthNum(8);
-            message.setText(templateInfo.getTemplateMailContent() + setEmailParam("인증번호",authNum));
-            mailSender.send(message);
-        }catch (Exception e){
-            log.info(e.getMessage());
-            throw e;
-        }
+        String authNum = generateAuthNum(8);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(senderInfo.getId());
+        message.setTo(to);
+        message.setSubject(templateInfo.getTemplateMailTitle());
+        message.setText(templateInfo.getTemplateMailContent() + setEmailParam("인증번호",authNum));
+        mailSender.send(message);
+
         return authNum;
     }
 

@@ -14,20 +14,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/register")
 @RequiredArgsConstructor
 @Slf4j
-public class RegisterController implements CrudController<RegisterForm> {
+public class RegisterController  {
 
 
     private final RegisterService registerService;
 
-
     @GetMapping
-    public String read(Model model) {
+    public String getForm(Model model) {
         model.addAttribute("registerForm",new RegisterForm());
         return "register";
     }
 
     @PostMapping
-    public String create(@Validated @ModelAttribute RegisterForm src ,BindingResult bindingResult ,Model model) {
+    public String register(@Validated @ModelAttribute RegisterForm src ,BindingResult bindingResult ,Model model) {
         if(!isSamePw(src.getFirstPw(),src.getSecondPw())){
             model.addAttribute("isDiffPw",true);
         }
@@ -37,16 +36,6 @@ public class RegisterController implements CrudController<RegisterForm> {
         return registerService.register(src,model);
     }
 
-
-    @Override
-    public String update(RegisterForm src) {
-        return null;
-    }
-
-    @Override
-    public String delete(RegisterForm src) {
-        return null;
-    }
 
     private boolean isSamePw(String pw1 , String pw2){
         return pw1.equals(pw2);

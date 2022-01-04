@@ -2,10 +2,11 @@ package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
 import com.planet.dashboard.auth.EmailAuth;
+import com.planet.dashboard.controller.request.dto.EmailValidationRequest;
+import com.planet.dashboard.controller.response.dto.ValidationResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
-import org.springframework.validation.MessageCodesResolver;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,23 +20,25 @@ public class ValidateApiController {
 
     private final EmailAuth emailAuth;
 
+
     @GetMapping("/email-send")
-    @ResponseBody
     public String sendEmail(@RequestParam String email , HttpServletRequest request){
-        log.info("validate target email : {}", email);
+
         emailAuth.validate(email , request);
         return "ok";
     }
 
-    @GetMapping("/email-validate")
-    @ResponseBody
-    public String validateEmail(@RequestParam String auth , HttpServletRequest request){
+    @PostMapping(value = "/email-validate",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Header<ValidationResponse> validateEmail(@RequestBody EmailValidationRequest emailValRequest , HttpServletRequest request){
         HttpSession session = request.getSession(false);
-        if(isNotVerified(auth, session)){
-            //TODO : 반환 결과메시지를 message resolver로 가져올려고 함.
-            return "인증 실패하였습니다.";
+        ValidationResponse response = new ValidationResponse();
+        if(isNotVerified(emailValRequest.getAuth(), session)){
+            response.setFail();
+            return Header.response(response , "인증 실패");
         }
-        return "인증 성공하였습니다. ";
+        response.setSuccess();
+        return Header.response(response, "인증 성공");
+
     }
 
     private boolean isNotVerified(String auth, HttpSession session) {

@@ -16,14 +16,14 @@ public class RegisterForm {
     @Size(min = 5, max = 200)
     private String email;
 
-    private boolean validated;
+    private Boolean isAuth;
 
     @NotBlank
-    @Size(min = 4,max = 20)
+    @Size(min = 6,max = 20)
     private String firstPw;
 
     @NotBlank
-    @Size(min = 4,max = 20)
+    @Size(min = 6,max = 20)
     private String SecondPw;
 
 }

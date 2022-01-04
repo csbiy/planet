@@ -30,10 +30,18 @@ public class LoginServiceImpl implements LoginService{
         return "login";
     }
 
-    private boolean isMember(LoginForm loginForm) {
+    @Override
+    public void logout(HttpServletRequest request) {
+        request.getSession(false).invalidate();
+    }
+
+
+
+     boolean isMember(LoginForm loginForm) {
         Optional<User> foundUser = userRepository.findById(loginForm.getEmail());
         return foundUser.isPresent();
     }
+
 
 
 

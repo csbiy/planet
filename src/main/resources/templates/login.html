@@ -15,7 +15,7 @@
     <p>password: <input type="password" th:field="*{password}"></p>
     <div th:errors="*{password}"></div>
 
-    <div th:if="${loginFail}"th:text="#{login.fail}"></div>
+    <div th:if="${loginFail}" th:text="#{login.fail}" ></div>
     <button type="submit">submit</button>
 </form>
 

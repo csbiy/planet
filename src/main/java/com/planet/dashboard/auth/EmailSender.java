@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 @Getter
 public final class EmailSender {
 
+
     private final EmailPlatform emailPlatform;
 
     private final String id;
 
     private final String password;
 
-    public EmailSender(PropertyResolver  resolver) {
+    public EmailSender(PropertyResolver resolver) {
 
         String platform = resolver.getProperty("smtp.platform");
         if(platform.equals("naver")){
