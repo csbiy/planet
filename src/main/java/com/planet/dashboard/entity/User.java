@@ -1,5 +1,6 @@
 package com.planet.dashboard.entity;
 
+import com.planet.dashboard.controller.request.dto.EmailForm;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -27,9 +28,9 @@ public class User {
 
     private LocalDateTime deletedAt;
 
-    public static User createUser(RegisterForm registerForm){
+    public static User createUser(RegisterForm registerForm , String email){
         return User.builder()
-                .email(registerForm.getEmail())
+                .email(email)
                 .password(registerForm.getFirstPw())
                 .build();
     }

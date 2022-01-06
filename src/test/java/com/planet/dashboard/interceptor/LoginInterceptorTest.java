@@ -43,7 +43,7 @@ class LoginInterceptorTest {
     void shouldAllowIfSessionExist() throws Exception {
         String requestURI = "some-path";
         HttpSession session = request.getSession(true);
-        session.setAttribute(SessionManager.SESSION_ID,"iamUser");
+        session.setAttribute(SessionManager.LOGIN_ID.name(), "iamUser");
         request.setRequestURI("/" + requestURI);
         boolean result = loginInterceptor.preHandle(request,response,null);
         int status = response.getStatus();

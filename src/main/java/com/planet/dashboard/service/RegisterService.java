@@ -1,5 +1,7 @@
 package com.planet.dashboard.service;
 
+import com.planet.dashboard.SessionManager;
+import com.planet.dashboard.auth.EmailSession;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
@@ -7,26 +9,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 @RequiredArgsConstructor
 public class RegisterService {
 
     private final UserRepository userRepository;
 
-       public String register(RegisterForm registerForm, Model model){
-
-           if(isExistMember(registerForm)){
-               model.addAttribute("existMember",true);
-               return "register";
-           }
-           userRepository.save(User.createUser(registerForm));
+       public String register(RegisterForm registerForm, HttpSession session){
+           EmailSession emailSession = (EmailSession) SessionManager.getSession(session, SessionManager.EMAIL_AUTH);
+           userRepository.save(User.createUser(registerForm,emailSession.getEmail()));
            return "index";
        }
 
-       private boolean isExistMember(RegisterForm registerForm){
-           return userRepository.findById(registerForm.getEmail()).isPresent();
-
-       }
 
 
 }

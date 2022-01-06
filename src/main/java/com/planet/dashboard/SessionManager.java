@@ -2,14 +2,28 @@ package com.planet.dashboard;
 
 import javax.servlet.http.HttpSession;
 
-public class SessionManager {
+public enum SessionManager {
 
-    public static final String SESSION_ID = "ADMIN_ID";
+    LOGIN_ID("ADMIN_ID"),
+    EMAIL_AUTH("EMAIL_KEY");
 
-    public static final String AUTH_ID = "EMAIL_KEY";
+    private final String id;
 
-    public static void addSession(HttpSession session ,String key ,Object val){
-        session.setAttribute(key,val);
+    SessionManager(String id) {
+        this.id = id;
+    }
+
+    public static void addSession(HttpSession session , SessionManager key , Object val){
+        session.setAttribute(key.name(),val);
+    }
+
+    public static void addSession(HttpSession session ,SessionManager key ,Object val,Integer maxMinute){
+        session.setAttribute(key.name(),val);
+        session.setMaxInactiveInterval(60*maxMinute);
+    }
+
+    public static Object getSession(HttpSession session, SessionManager key ){
+         return  session.getAttribute(key.name());
     }
 
 

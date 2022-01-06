@@ -16,10 +16,21 @@ public class Header<T>  implements Serializable {
     String description;
     String trxStartTime;
 
+    /***
+     * response Dto 의 타입이 타입매개변수 T가 들어올게 compile 시점에 확실하기 떄문에 타입안전합니다.
+     */
+    @SuppressWarnings("unchecked")
     public static <T> Header<T>  response(T data , String description ){
        return (Header<T>) Header.builder()
                 .data(data)
                 .description(description)
+                .trxStartTime(LocalDateTime.now().toString())
+                .build();
+    }
+    @SuppressWarnings("unchecked")
+    public static <T> Header<T>  response(T data ){
+       return (Header<T>) Header.builder()
+                .data(data)
                 .trxStartTime(LocalDateTime.now().toString())
                 .build();
     }

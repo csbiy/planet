@@ -45,7 +45,7 @@ class LoginServiceImplTest {
 
         //then
         assertThat(redirectPath).isEqualTo("index");
-        LoginForm value = (LoginForm) mockHttpServletRequest.getSession().getAttribute(SessionManager.SESSION_ID);
+        LoginForm value = (LoginForm) mockHttpServletRequest.getSession().getAttribute(SessionManager.LOGIN_ID.name());
         assertThat(value).isEqualTo(loginForm);
         assertThat(model.getAttribute("loginFail")).isNull();
     }

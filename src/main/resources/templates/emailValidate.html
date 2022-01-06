@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eg">
+<head>
+    <title>Register</title>
+    <base href="/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div th:object="${emailValidateForm}">
+        <p>email : <input type="email" th:field="*{email}"></p>
+        <div>
+            <button id="email-send-btn" type="button">send auth num</button>
+        </div>
+        <div th:errors="*{email}"></div>
+        <div>
+            <input type="text" id="auth">
+            <button id="auth-validate-btn" type="button">validate</button>
+        </div>
+    </div>
+
+    <script th:src="@{/js/bundle.js}" type="text/javascript"></script>
+</body>
+</html>

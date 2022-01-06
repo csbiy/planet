@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService{
     public String login(HttpServletRequest request, LoginForm form, Model model) {
 
         if(isMember(form)){
-            SessionManager.addSession(request.getSession(),SessionManager.SESSION_ID, form);
+            SessionManager.addSession( request.getSession() , SessionManager.LOGIN_ID , form);
             return "index";
         }
         model.addAttribute("loginFail",true);

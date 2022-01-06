@@ -1,14 +1,17 @@
 package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailAuth;
+import com.planet.dashboard.auth.EmailHandler;
+import com.planet.dashboard.auth.EmailSession;
 import com.planet.dashboard.controller.request.dto.EmailValidationRequest;
 import com.planet.dashboard.controller.response.dto.ValidationResponse;
+import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,21 +21,28 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/register")
 public class ValidateApiController {
 
-    private final EmailAuth emailAuth;
+    private final EmailHandler emailHandler;
+    private final UserRepository userRepository;
 
 
     @GetMapping("/email-send")
-    public String sendEmail(@RequestParam String email , HttpServletRequest request){
+    public Header<ValidationResponse> sendEmail(@RequestParam String email , HttpServletRequest request){
 
-        emailAuth.validate(email , request);
-        return "ok";
+        ValidationResponse response = new ValidationResponse();
+        if(userRepository.findById(email).isPresent()){
+                response.setDuplicate();
+                return Header.response(response);
+        };
+        response.setWaiting();
+        emailHandler.send(email , request);
+        return Header.response(response);
     }
 
     @PostMapping(value = "/email-validate",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Header<ValidationResponse> validateEmail(@RequestBody EmailValidationRequest emailValRequest , HttpServletRequest request){
-        HttpSession session = request.getSession(false);
+    public Header<ValidationResponse> validateEmail(@RequestBody EmailValidationRequest emailValRequest , HttpSession session){
         ValidationResponse response = new ValidationResponse();
-        if(isNotVerified(emailValRequest.getAuth(), session)){
+
+        if(isNotVerified( emailValRequest.getAuth() , session )){
             response.setFail();
             return Header.response(response , "인증 실패");
         }
@@ -42,7 +52,13 @@ public class ValidateApiController {
     }
 
     private boolean isNotVerified(String auth, HttpSession session) {
-        return session == null || !(session.getAttribute(SessionManager.AUTH_ID).equals(auth));
+        String actualInput = auth.trim();
+        Object emailSession = SessionManager.getSession(session, SessionManager.EMAIL_AUTH);
+        return  ( session == null ||   emailSession == null || !(((EmailSession) emailSession).getAuth().equals(actualInput)) );
+
+
     }
+
+
 
 }

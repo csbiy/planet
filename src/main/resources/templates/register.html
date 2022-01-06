@@ -13,20 +13,8 @@
 
 
 <form th:object="${registerForm}" method="post" action="/register">
-  <div>
-    <p>email : <input type="email" th:field="*{email}"></p>
-    <div>
-      <button id="email-send-btn" type="button">send auth num</button>
-    </div>
-    <div th:errors="*{email}"></div>
-    <div>
-      <input type="text" id="auth"> 
-      <button id="auth-validate-btn" type="button">validate</button>
-      <p class="auth-result"></p>
-      <input type="hidden" th:field="*{isAuth}" th:value="false">
-    </div>
-  </div>
 
+  <p th:text="| email : ${registerForm.email}|">
   <p>password: <input type="password" th:field="*{firstPw}"></p>
   <div th:errors="*{firstPw}"></div>
   <p>re-password: <input type="password" th:field="*{secondPw}"></p>
@@ -39,8 +27,6 @@
   <div th:if="${existMember}" th:text="#{exist.member}"></div>
 </form>
 
-  <!-- vendor js -->
-  <script th:src="@{/js/bundle.js}" type="text/javascript"></script>
 
 </body>
 
