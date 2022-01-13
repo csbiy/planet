@@ -36,11 +36,7 @@ authValBtn.addEventListener("click",()=>{
     .then((resp)=>{
         let emailAuthResponse :EmailAuthResponse = resp.data.data;
         window.alert(emailAuthResponse.description);
-        console.log(emailAuthResponse);
-        console.log(emailAuthResponse.status.valueOf());
-        console.log(Status.SUCCESS.valueOf());
-        //TODO  :  emailAuthResponse.status.valueOf() != Status.SUCCESS.valueOf()
-        if(emailAuthResponse.status.valueOf() == Status.SUCCESS.valueOf()){
+        if(emailAuthResponse.status === Status.SUCCESS){
             location.href = "/register";
         }      
 

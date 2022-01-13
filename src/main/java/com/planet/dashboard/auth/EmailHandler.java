@@ -11,14 +11,14 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class EmailHandler {
 
-    private final Integer sessionInvalidateDuration= 3; // minute
-    private final EmailService emailServiceImpl;
+    private static final Integer SESSION_INVALIDATE_DURATION = 3; // minute
+    private final EmailService emailService;
 
     public void send(String email , HttpServletRequest request){
-        String authNum = emailServiceImpl.sendTemplateMessage(email);
+        String authNum = emailService.sendTemplateMessage(email);
         HttpSession session = request.getSession();
         EmailSession emailSession = new EmailSession(authNum, email);
-        SessionManager.addSession( session, SessionManager.EMAIL_AUTH  , emailSession , sessionInvalidateDuration );
+        SessionManager.addSession( session, SessionManager.EMAIL_AUTH  , emailSession , SESSION_INVALIDATE_DURATION );
 
     }
 }

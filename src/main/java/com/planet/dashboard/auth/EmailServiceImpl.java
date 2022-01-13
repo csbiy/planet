@@ -13,6 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
+    private static final int AUTH_LENGTH = 8;
     private final EmailSender senderInfo;
     private final MailTemplate templateInfo;
     private final JavaMailSender mailSender;
@@ -29,7 +30,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public String sendTemplateMessage(String to) {
 
-        String authNum = generateAuthNum(8);
+        String authNum = generateAuthNum(AUTH_LENGTH);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(senderInfo.getId());
         message.setTo(to);

@@ -4,10 +4,10 @@ interface EmailAuthResponse {
 }
 
 enum Status{
-    WAITING_AUTHORIZATION,
-    SUCCESS,
-    FAIL,
-    DUPLICATE_MEMBER
+    WAITING_AUTHORIZATION = "WAITING_AUTHORIZATION",
+    SUCCESS = "SUCCESS",
+    FAIL = "FAIL",
+    DUPLICATE_MEMBER ="DUPLICATE_MEMBER"
 }
 
 export {EmailAuthResponse,Status}

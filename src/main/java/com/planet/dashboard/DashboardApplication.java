@@ -24,7 +24,6 @@ public class DashboardApplication {
 		User admin = User.builder()
 				.email("test@naver.com")
 				.password("1234")
-				.createdAt(LocalDateTime.now())
 				.build();
 		userRepository.save(admin);
 

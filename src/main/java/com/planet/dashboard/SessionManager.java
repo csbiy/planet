@@ -7,6 +7,7 @@ public enum SessionManager {
     LOGIN_ID("ADMIN_ID"),
     EMAIL_AUTH("EMAIL_KEY");
 
+    private static final int SECOND = 60;
     private final String id;
 
     SessionManager(String id) {
@@ -19,7 +20,7 @@ public enum SessionManager {
 
     public static void addSession(HttpSession session ,SessionManager key ,Object val,Integer maxMinute){
         session.setAttribute(key.name(),val);
-        session.setMaxInactiveInterval(60*maxMinute);
+        session.setMaxInactiveInterval(SECOND * maxMinute);
     }
 
     public static Object getSession(HttpSession session, SessionManager key ){

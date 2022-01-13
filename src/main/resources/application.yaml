@@ -7,11 +7,12 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+
 
 logging:
   level:
@@ -21,8 +22,7 @@ logging:
           descriptor:
             sql: trace
 
-
-
+## port & login session id 만료시간 설정
 server:
   port:
     8080
@@ -30,3 +30,14 @@ server:
     session:
       timeout:
         1800s
+
+## email 인증 관련 설정
+smtp:
+  platform: naver
+  sender:
+    id: katd6@naver.com
+    password: KIM13032695!
+  template:
+    title: planet 인증 메일입니다.
+    content: 안녕하세요, planet 회원가입을 위한 인증번호를 안내드립니다, 하기의 가입정보를 입력하신 것이 맞다면 아래의 인증번호를 입력해주세요.
+

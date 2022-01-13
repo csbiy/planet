@@ -13,13 +13,10 @@
 
 
 <form th:object="${registerForm}" method="post" action="/register">
-
-  <p th:text="| email : ${registerForm.email}|">
   <p>password: <input type="password" th:field="*{firstPw}"></p>
   <div th:errors="*{firstPw}"></div>
   <p>re-password: <input type="password" th:field="*{secondPw}"></p>
   <div th:errors="*{secondPw}"></div>
-
   <div th:if="${isDiffPw}" th:text="#{different.password}"></div>
 
 

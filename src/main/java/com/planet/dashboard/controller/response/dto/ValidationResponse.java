@@ -30,7 +30,7 @@ public class ValidationResponse implements Serializable {
         status = Status.DUPLICATE_MEMBER;
     }
 
-    private enum Status{
+    public enum Status{
         WAITING_AUTHORIZATION,
         SUCCESS,
         FAIL,

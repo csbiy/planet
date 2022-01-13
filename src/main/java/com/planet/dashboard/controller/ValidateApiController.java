@@ -55,8 +55,6 @@ public class ValidateApiController {
         String actualInput = auth.trim();
         Object emailSession = SessionManager.getSession(session, SessionManager.EMAIL_AUTH);
         return  ( session == null ||   emailSession == null || !(((EmailSession) emailSession).getAuth().equals(actualInput)) );
-
-
     }
 
 

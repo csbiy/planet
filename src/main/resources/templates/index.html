@@ -10,7 +10,7 @@
 
     <a th:if="${session.isEmpty()}" th:href="@{/register/email-validate}">register</a>
     <a th:unless="${session.isEmpty()}" th:href="@{/logout}">logout</a>
-
+    <a th:href="@{/board}">게시판</a>
 </body>
 
 </html>
