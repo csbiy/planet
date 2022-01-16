@@ -23,10 +23,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/index","/","/login","/register/**","/css/**","/js/**","/vendor/**","")
-                .order(1);
+//        registry.addInterceptor(new LoginInterceptor())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/index","/","/login","/register/**","/css/**","/js/**","/vendor/**","/swagger-ui")
+//                .order(1);
     }
 
     @Bean

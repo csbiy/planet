@@ -18,7 +18,6 @@ public class BoardController {
 
     @GetMapping
     public String getBoardList(Model model){
-        model.addAttribute("boardList");
         return "board";
     }
 }
