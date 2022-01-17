@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/api/register")
 public class ValidateApiController {
 
     private final EmailHandler emailHandler;

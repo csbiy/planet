@@ -1,15 +1,17 @@
 package com.planet.dashboard.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
 @Getter
-@Builder
 public class Board extends BaseEntity {
 
     @Id
@@ -24,7 +26,15 @@ public class Board extends BaseEntity {
 
     Integer viewNum;
 
-    String deletedBy;
+    String createdBy;
 
-
+    @Builder
+    public Board(Long seq, String title, String content, Integer viewNum, LocalDateTime dateTime , LocalDateTime updatedAt , LocalDateTime deletedAt ,String deletedBy , String createdBy) {
+        super(dateTime,updatedAt,deletedAt,deletedBy);
+        this.seq = seq;
+        this.title = title;
+        this.content = content;
+        this.viewNum = viewNum;
+        this.createdBy = createdBy;
+    }
 }

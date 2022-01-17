@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
@@ -100,7 +101,6 @@ class LoginServiceImplTest {
         return User.builder()
                 .email(email)
                 .password(password)
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 }

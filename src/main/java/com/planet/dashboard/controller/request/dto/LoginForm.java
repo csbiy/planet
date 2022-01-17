@@ -1,7 +1,9 @@
 package com.planet.dashboard.controller.request.dto;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -15,6 +17,7 @@ public class LoginForm {
     private  String email;
 
     @NotBlank
+    @Length(max = 2000,message = "hi~~~")
     private  String password;
 
 

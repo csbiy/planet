@@ -6,13 +6,12 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
 public class User extends BaseEntity {
 
@@ -28,8 +27,16 @@ public class User extends BaseEntity {
                 .build();
     }
 
+    @Builder
+    public User(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, String email, String password, List<Board> boards) {
+        super(createdAt, updatedAt, deletedAt, deletedBy);
+        this.email = email;
+        this.password = password;
+        this.boards = boards;
+    }
+
     @OneToMany
-    private List<Board> boards = new ArrayList<>();
+    private List<Board> boards;
 
 
 }
