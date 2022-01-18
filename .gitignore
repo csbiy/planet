@@ -7,6 +7,8 @@ build/
 !src/main/resources/application.yaml
 src/main/resources/static/css/
 src/main/resources/static/js/
+src/main/resources/static/scss/
+src/main/resources/static/vendor/
 src/main/resources/static/src/node_modules/
 
 
