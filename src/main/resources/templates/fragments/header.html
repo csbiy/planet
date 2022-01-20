@@ -1,11 +1,15 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:fragment="header">
+    <head th:fragment="header(scripts,links)">
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
              <title>planet</title>
             <link th:ref="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
             <link th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
+            <!-- Global Css for all pages  -->
+            <link th:href="@{css/global.min.css}" rel="stylesheet">
+            <!-- Custom Css for specific pages   -->
+            <th:fragment th:replace="${links}"></th:fragment>
             <!-- Bootstrap core JavaScript-->
             <script th:src="@{vendor/jquery/jquery.min.js}" defer></script>
             <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
@@ -13,6 +17,7 @@
             <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}" defer></script>
             <!-- Custom scripts for all pages-->
             <script th:src="@{js/sb-admin-2.min.js}" defer></script>
-
+            <!-- Custom Scripts for specific pages  -->
+            <th:fragment th:replace="${scripts}"></th:fragment>
     </head>
 </html>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="eg">
-<head th:replace=" fragments/header :: header "></head>
+<head th:replace=" fragments/header :: header(~{::script},_) ">
+  <script th:src="@{/js/board.js}" defer></script>
+</head>
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -19,7 +21,32 @@
 
                 <!-- 실질적인 내용 -->
                 <div class="row">
-                    <h1>board</h1>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                          <thead>
+                            <tr>
+                              <th>title</th>
+                              <th>createdBy</th>
+                              <th>viewNum</th>
+                              <th>vote</th>
+                            </tr>
+                          </thead>
+                          <tbody >
+                            <tr th:each=" board : ${boards.getContent()}" class="board">
+                              <td th:text="${board.title}"></td>
+                              <td th:text="${board.createdBy}"></td>
+                              <td th:text="${board.viewNum}"></td>
+                              <td th:text="${board.voteNum}" class="vote-num"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                </div>
+
+                <div class="row position-relative mt-5">
+                    <div class="position-absolute absolute-center" >
+                        <a class="btn btn-primary mr-1" th:each=" pageNum : ${ #numbers.sequence(0,boards.getTotalPages())}" th:href="@{/board(pageNum=${pageNum})}" role="button" th:text="${pageNum}"></a>
+                    </div>
                 </div>
                 <!-- 실질적인 내용 -->
 
