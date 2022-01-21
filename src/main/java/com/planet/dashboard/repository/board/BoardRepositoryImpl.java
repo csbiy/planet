@@ -1,8 +1,6 @@
 package com.planet.dashboard.repository.board;
 
 import com.planet.dashboard.controller.response.dto.BoardDto;
-import com.planet.dashboard.entity.Board;
-import com.planet.dashboard.entity.QBoard;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -10,10 +8,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
-
 import java.util.List;
 
-import static com.planet.dashboard.entity.QBoard.*;
+import static com.planet.dashboard.entity.QBoard.board;
 
 
 public class BoardRepositoryImpl implements BoardRepositoryCustom {

@@ -5,6 +5,7 @@ import com.planet.dashboard.controller.request.dto.LoginForm;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -29,6 +30,11 @@ class LoginServiceImplTest {
 
     @Autowired UserRepository userRepository;
     @Autowired LoginServiceImpl loginService;
+
+    @BeforeEach
+    public void init(){
+        userRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("login시 session value가 정상적으로 추가되는지 확인합니다.")

@@ -17,7 +17,6 @@ public class LoginForm {
     private  String email;
 
     @NotBlank
-    @Length(max = 2000,message = "hi~~~")
     private  String password;
 
 

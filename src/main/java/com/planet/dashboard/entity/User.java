@@ -3,9 +3,7 @@ package com.planet.dashboard.entity;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,12 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_seq")
+    private Long seq;
     private String email;
+
+    private String nickName;
 
     private String password;
 
@@ -28,11 +31,12 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, String email, String password, List<Board> boards) {
+    public User(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, String email, String password, String nickName ,List<Board> boards) {
         super(createdAt, updatedAt, deletedAt, deletedBy);
         this.email = email;
         this.password = password;
         this.boards = boards;
+        this.nickName = nickName;
     }
 
     @OneToMany

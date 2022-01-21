@@ -29,7 +29,7 @@ public class ValidateApiController {
     public Header<ValidationResponse> sendEmail(@RequestParam String email , HttpServletRequest request){
 
         ValidationResponse response = new ValidationResponse();
-        if(userRepository.findById(email).isPresent()){
+        if(userRepository.findByEmail(email).isPresent()){
                 response.setDuplicate();
                 return Header.response(response);
         };

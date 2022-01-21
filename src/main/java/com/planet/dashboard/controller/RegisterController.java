@@ -44,7 +44,8 @@ public class RegisterController  {
         if(bindingResult.hasErrors()){
             return "register";
         }
-        return registerService.register(src,session);
+        registerService.register(src,session);
+        return "index";
     }
 
 

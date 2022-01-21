@@ -39,9 +39,9 @@ class RegisterServiceTest {
         // 인증된 회원이라 가정하고 "auth" string을 넣어주었습니다.
         SessionManager.addSession(mockHttpSession,SessionManager.EMAIL_AUTH,new EmailSession("auth",email));
         // when
-        registerService.register(registerForm,mockHttpSession);
+        User registeredUser = registerService.register(registerForm, mockHttpSession);
         //then
-        Optional<User> foundUser = userRepository.findById(email);
+        Optional<User> foundUser = userRepository.findById(registeredUser.getSeq());
         Assertions.assertThat(foundUser.isPresent()).isTrue();
         Assertions.assertThat(foundUser.get().getPassword()).isEqualTo(password);
     }

@@ -1,20 +1,21 @@
 package com.planet.dashboard.controller.response.dto;
 
 import com.planet.dashboard.entity.Board;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
-import org.springframework.data.domain.Page;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Getter
-@ToString
-public final class BoardDto {
+public class BoardDetailDto {
 
-
-    private final Long seq;
     private final String title;
+
+    private final String content;
 
     private final String createdAt;
 
@@ -22,17 +23,23 @@ public final class BoardDto {
 
     private final Integer viewNum;
 
-    private final Integer voteNum;
+    private final Integer likeNum;
+
+    private final Integer dislikeNum;
+
+    private final List<CommentDto> comments;
 
 
-    public BoardDto(Board board) {
+    public BoardDetailDto(Board board) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm", Locale.KOREA);
-        this.seq = board.getSeq();
         this.title = board.getTitle();
+        this.content = board.getContent();
         this.createdAt = dateTimeFormatter.format(board.getCreatedAt());
         this.createdBy = board.getCreatedBy();
         this.viewNum = board.getViewNum();
-        this.voteNum =  board.getLikeNum() - board.getDislikeNum();
-    }
+        this.likeNum = board.getLikeNum();
+        this.dislikeNum = board.getDislikeNum();
+        this.comments = board.getComments().stream().map(CommentDto::new).collect(Collectors.toList());
 
+    }
 }

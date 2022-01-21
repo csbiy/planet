@@ -21,9 +21,9 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public String login(HttpServletRequest request, LoginForm form, Model model) {
-
-        if(isMember(form)){
-            SessionManager.addSession( request.getSession() , SessionManager.LOGIN_ID , form);
+        Optional<User> foundUser = userRepository.findByEmail(form.getEmail());
+        if(foundUser.isPresent()){
+            SessionManager.addSession( request.getSession() , SessionManager.LOGIN_ID , foundUser.get());
             return "index";
         }
         model.addAttribute("loginFail",true);
@@ -35,12 +35,6 @@ public class LoginServiceImpl implements LoginService{
         request.getSession(false).invalidate();
     }
 
-
-
-     boolean isMember(LoginForm loginForm) {
-        Optional<User> foundUser = userRepository.findById(loginForm.getEmail());
-        return foundUser.isPresent();
-    }
 
 
 

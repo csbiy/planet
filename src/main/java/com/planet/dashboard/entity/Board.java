@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +19,7 @@ public class Board extends BaseEntity {
     private static final int DEFAULT_DISLIKE_NUM = 0;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_seq")
     private Long seq;
 
     @Column(nullable = false)
@@ -33,11 +36,17 @@ public class Board extends BaseEntity {
 
     private String createdBy;
 
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany
+    private List<AttachedFile> files = new ArrayList<>();
+
     @Builder
     private Board(Long seq, String title, String content, Integer viewNum,
-                 LocalDateTime dateTime , LocalDateTime updatedAt , LocalDateTime deletedAt ,
+                 LocalDateTime createdAt , LocalDateTime updatedAt , LocalDateTime deletedAt ,
                  String deletedBy , String createdBy , Integer likeNum , Integer dislikeNum) {
-        super(dateTime,updatedAt,deletedAt,deletedBy);
+        super(createdAt,updatedAt,deletedAt,deletedBy);
         this.seq = seq;
         this.title = title;
         this.content = content;
@@ -57,4 +66,11 @@ public class Board extends BaseEntity {
                 .content(content)
                 .build();
     }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
+    public void addFile(AttachedFile file){ this.files.add(file);}
+
+
 }
