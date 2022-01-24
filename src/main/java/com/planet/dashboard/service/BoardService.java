@@ -3,6 +3,7 @@ package com.planet.dashboard.service;
 import com.planet.dashboard.controller.request.dto.BoardForm;
 import com.planet.dashboard.controller.response.dto.BoardDetailDto;
 import com.planet.dashboard.controller.response.dto.BoardDto;
+import com.planet.dashboard.entity.AttachedFile;
 import com.planet.dashboard.entity.Board;
 import com.planet.dashboard.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,5 +50,10 @@ public class BoardService {
     @Transactional
     public Board createBoard(BoardForm boardForm , String nickName) {
         return boardRepository.save( Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent()));
+    }
+    public Board createBoardWithFile(BoardForm boardForm , String nickName , List<AttachedFile> attachedFiles) {
+        Board board = Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent());
+        attachedFiles.stream().forEach(board::addFile);
+        return boardRepository.save(board);
     }
 }

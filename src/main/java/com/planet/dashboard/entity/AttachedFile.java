@@ -1,12 +1,16 @@
 package com.planet.dashboard.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class AttachedFile {
+@NoArgsConstructor
+public class AttachedFile extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +21,11 @@ public class AttachedFile {
 
     private String fileSavePath;
 
-
+    @Builder
+    public AttachedFile(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, Long id, String fileName, String fileSavePath) {
+        super(createdAt, updatedAt, deletedAt, deletedBy);
+        this.id = id;
+        this.fileName = fileName;
+        this.fileSavePath = fileSavePath;
+    }
 }

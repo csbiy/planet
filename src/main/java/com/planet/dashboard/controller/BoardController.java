@@ -2,6 +2,7 @@ package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
 import com.planet.dashboard.controller.request.dto.BoardForm;
+import com.planet.dashboard.controller.response.dto.AttachedFileDto;
 import com.planet.dashboard.entity.AttachedFile;
 import com.planet.dashboard.entity.Board;
 import com.planet.dashboard.entity.User;
@@ -41,10 +42,8 @@ public class BoardController {
     public String createBoard(BoardForm boardForm , HttpSession session){
         log.info("boardForm : {} , {} , file inside form : {} ", boardForm.getTitle(),boardForm.getContent(), boardForm.getFiles());
         User user = (User) SessionManager.getSession(session, SessionManager.LOGIN_ID);
-        List<AttachedFile> attachedFiles = fileHandler.saveFile(boardForm.getFiles());
-        Board board = boardService.createBoard(boardForm, user.getNickName());
-        attachedFiles.stream().forEach(board::addFile);
+        List<AttachedFile> attachedFiles = fileHandler.saveFile(boardForm.getFiles() , user);
+        boardService.createBoardWithFile(boardForm, user.getNickName() , attachedFiles);
         return "board";
-
     }
 }
