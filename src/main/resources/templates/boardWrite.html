@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eg">
+<head th:replace=" fragments/header :: header(_,_) "></head>
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <div th:replace=" fragments/side :: side "></div>
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <div th:replace=" fragments/topbar :: topbar "></div>
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">main</h1>
+        </div>
+
+        <!-- 실질적인 내용 -->
+        <div th:object="${board}">
+          <div class="row d-flex">
+            <div>
+              <!--  제목 : [댓글개수] 형태로 구상중임 -->
+              <p>제목 : <span th:text="  |*{title} [ *{comments?.size()} ]| "></span></p>
+              <p>작성일시 : <span th:text="*{createdAt}"></span></p>
+            </div>
+            <div>
+              <p>작성자 : <span th:text="*{createdBy}"></span></p>
+              <p>조회수 : <span th:text="*{viewNum}"></span></p>
+            </div>
+          </div>
+          <div class="row">
+            <p><span th:text="*{content}"></span></p>
+          </div>
+          <div class="row">
+           <p> like : <span th:text="*{likeNum}"></span></p>
+           <p> dislike : <span th:text="*{dislikeNum}"></span></p>
+          </div>
+        </div>
+
+          <!-- 댓글 리스트 -->
+        <div class="row">
+          <div th:each=" comment : ${board.comments}" >
+            <span th:text="${comment.nickName}"></span>
+            <span th:text="${comment.createdAt}"></span>
+            <span th:text="${comment.content}"></span>
+            <span th:text="${comment.likeNum}"></span>
+            <span th:text="${comment.dislikeNum}"></span>
+          </div>
+       </div>
+      <!-- 실질적인 내용 -->
+      <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <div th:replace=" fragments/footer :: footer "></div>
+    <!-- End of Footer -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+</body>
+</html>
