@@ -1,7 +1,5 @@
 package com.planet.dashboard.controller;
 
-import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailSession;
 import com.planet.dashboard.controller.request.dto.EmailForm;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import com.planet.dashboard.service.RegisterService;
