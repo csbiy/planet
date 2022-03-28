@@ -1,7 +1,6 @@
 package com.planet.dashboard.config;
 
-import com.planet.dashboard.auth.EmailSender;
-import com.planet.dashboard.interceptor.LoginInterceptor;
+import com.planet.dashboard.email.EmailSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +9,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.format.DateTimeFormatter;
@@ -23,15 +21,6 @@ import java.util.Properties;
 public class WebConfig implements WebMvcConfigurer {
 
     private final EmailSender mailSender;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        WebMvcConfigurer.super.addInterceptors(registry);
-//        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/index","/","/login","/register/**","/css/**","/js/**","/vendor/**","/swagger-ui")
-//                .order(1);
-    }
 
     @Bean
     public MessageSource messageSource(){

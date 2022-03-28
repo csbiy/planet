@@ -1,13 +1,12 @@
 package com.planet.dashboard.service;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailSession;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
+import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,13 +14,13 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class RegisterService {
 
+
     private final UserRepository userRepository;
 
    public User register(RegisterForm registerForm, HttpSession session){
        EmailSession emailSession = (EmailSession) SessionManager.getSession(session, SessionManager.EMAIL_AUTH);
        return userRepository.save(User.createUser(registerForm,emailSession.getEmail()));
    }
-
 
 
 }

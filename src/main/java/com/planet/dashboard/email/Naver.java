@@ -1,4 +1,4 @@
-package com.planet.dashboard.auth;
+package com.planet.dashboard.email;
 
 
 public class Naver extends EmailPlatform{

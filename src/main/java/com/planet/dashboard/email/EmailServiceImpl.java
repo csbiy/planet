@@ -1,4 +1,4 @@
-package com.planet.dashboard.auth;
+package com.planet.dashboard.email;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.planet.dashboard.auth;
+package com.planet.dashboard.email;
 
 import lombok.Getter;
 import org.springframework.core.env.PropertyResolver;
@@ -15,8 +15,7 @@ public final class EmailSender {
 
     private final String password;
 
-    public EmailSender(PropertyResolver resolver) {
-
+    public EmailSender( PropertyResolver resolver ) {
         String platform = resolver.getProperty("smtp.platform");
         if(platform.equals("naver")){
             this.emailPlatform = new Naver();

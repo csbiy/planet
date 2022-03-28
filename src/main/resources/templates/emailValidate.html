@@ -4,6 +4,8 @@
     <title>Register</title>
     <base href="/">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
     <div th:object="${emailValidateForm}">
@@ -20,4 +22,5 @@
 
     <script th:src="@{/js/bundle.js}" type="text/javascript"></script>
 </body>
+<csrf />
 </html>

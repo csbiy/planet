@@ -1,8 +1,8 @@
 package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailHandler;
-import com.planet.dashboard.auth.EmailSession;
+import com.planet.dashboard.email.EmailHandler;
+import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.controller.request.dto.EmailValidationRequest;
 import com.planet.dashboard.controller.response.dto.ValidationResponse;
 import com.planet.dashboard.repository.UserRepository;
@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

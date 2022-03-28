@@ -1,23 +1,19 @@
 package com.planet.dashboard.service;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailSession;
+import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RegisterServiceTest {
@@ -41,7 +37,11 @@ class RegisterServiceTest {
         // when
         User registeredUser = registerService.register(registerForm, mockHttpSession);
         //then
+<<<<<<< HEAD
         Optional<User> foundUser = userRepository.findById(registeredUser.getSeq());
+=======
+        Optional<User> foundUser = userRepository.findByEmail(email);
+>>>>>>> feat-01
         Assertions.assertThat(foundUser.isPresent()).isTrue();
         Assertions.assertThat(foundUser.get().getPassword()).isEqualTo(password);
     }

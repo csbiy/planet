@@ -1,9 +1,9 @@
 package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.auth.EmailService;
-import com.planet.dashboard.auth.EmailServiceImpl;
-import com.planet.dashboard.auth.EmailSession;
+import com.planet.dashboard.email.EmailService;
+import com.planet.dashboard.email.EmailServiceImpl;
+import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.controller.response.dto.ValidationResponse;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;

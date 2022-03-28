@@ -1,4 +1,4 @@
-package com.planet.dashboard.auth;
+package com.planet.dashboard.email;
 
 import com.planet.dashboard.SessionManager;
 import lombok.RequiredArgsConstructor;

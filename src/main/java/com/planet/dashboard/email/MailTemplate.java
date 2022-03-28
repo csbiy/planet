@@ -1,4 +1,4 @@
-package com.planet.dashboard.auth;
+package com.planet.dashboard.email;
 
 import lombok.Getter;
 import org.springframework.core.env.PropertyResolver;
