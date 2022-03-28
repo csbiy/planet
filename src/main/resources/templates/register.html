@@ -6,11 +6,8 @@
   <base href="/">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link  th:href="@{/css/register.min.css}" rel="stylesheet" type="text/css">
-  
 </head>
 <body>
-
-
 
 <form th:object="${registerForm}" method="post" action="/register">
   <p>password: <input type="password" th:field="*{firstPw}"></p>
@@ -18,8 +15,7 @@
   <p>re-password: <input type="password" th:field="*{secondPw}"></p>
   <div th:errors="*{secondPw}"></div>
   <div th:if="${isDiffPw}" th:text="#{different.password}"></div>
-
-
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
   <button type="submit">submit</button>
   <div th:if="${existMember}" th:text="#{exist.member}"></div>
 </form>

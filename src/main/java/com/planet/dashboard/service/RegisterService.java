@@ -1,8 +1,8 @@
 package com.planet.dashboard.service;
 
 import com.planet.dashboard.SessionManager;
-import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
+import com.planet.dashboard.email.EmailSession;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class RegisterService {
 
+
     private final UserRepository userRepository;
 
    public String register(RegisterForm registerForm, HttpSession session){
@@ -21,7 +22,6 @@ public class RegisterService {
        userRepository.save(User.createUser(registerForm,emailSession.getEmail()));
        return "index";
    }
-
 
 
 }
