@@ -2,24 +2,17 @@ package com.planet.dashboard.service;
 
 import com.planet.dashboard.entity.Role;
 import com.planet.dashboard.repository.UserRepository;
-<<<<<<< HEAD
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-=======
->>>>>>> feat-01
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-<<<<<<< HEAD
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.annotation.Commit;
-=======
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithMockUser;
->>>>>>> feat-01
+
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,13 +51,4 @@ class LoginServiceImplTest {
         assertThat(authentication).isNull();
     }
 
-<<<<<<< HEAD
-    private User createUser(String email, String password) {
-        return User.builder()
-                .email(email)
-                .password(password)
-                .build();
-    }
-=======
->>>>>>> feat-01
 }
