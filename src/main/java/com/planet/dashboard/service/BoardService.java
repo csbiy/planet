@@ -26,17 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
 
-
     private static final int PAGE_SIZE = 20;
-
-
     private final BoardRepository boardRepository;
-
-
-
-    public Page<BoardDto> getBoardsSortedByrCreatedAt(Integer pageNum){
-        return boardRepository.findAllByOrderByCreatedAtAsc(PageRequest.of(pageNum, PAGE_SIZE));
-    }
 
     @Transactional
     public BoardDetailDto findById(Long id){
@@ -46,7 +37,6 @@ public class BoardService {
         }
         return null;
     }
-
     @Transactional
     public Board createBoard(BoardForm boardForm , String nickName) {
         return boardRepository.save( Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent()));
@@ -56,4 +46,6 @@ public class BoardService {
         attachedFiles.stream().forEach(board::addFile);
         return boardRepository.save(board);
     }
+
+
 }

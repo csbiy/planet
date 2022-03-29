@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode:"development",
-  entry:'./ts/editor.ts',
+  entry:'./ts/index.ts',
   module: {
            
             rules: [
@@ -18,7 +18,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'editor.js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, './../js'),
     }
 };

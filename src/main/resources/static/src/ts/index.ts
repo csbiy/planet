@@ -19,36 +19,36 @@ function getCookie(name :string) :string {
 }
 
 emailSendBtn.addEventListener("click",()=>{
-    axios.get("/register/email-send?email=" + emailInput.value)
-    .then((resp)=>{
-        let emailAuthResponse :EmailAuthResponse = resp.data.data;
-        if(emailAuthResponse.status.valueOf() === Status.DUPLICATE_MEMBER.valueOf()){
-            window.alert(emailAuthResponse.description);
-        }
-    })
-    .catch((err)=>{
-        throw err;
-    })
-})  
+    axios.get("/api/register/email-send?email=" + emailInput.value)
+        .then((resp)=>{
+            let emailAuthResponse :EmailAuthResponse = resp.data.data;
+            if(emailAuthResponse.status.valueOf() === Status.DUPLICATE_MEMBER.valueOf()){
+                window.alert(emailAuthResponse.description);
+            }
+        })
+        .catch((err)=>{
+            throw err;
+        })
+})
 
 authValBtn.addEventListener("click",()=>{
-    axios.post("/register/email-validate",{
-        auth : authInput.value 
-        
+    axios.post("/api/register/email-validate",{
+        auth : authInput.value
+
     },{
         headers :{
-                [document.querySelector("meta[name='_csrf_header']").getAttribute("content")] : document.querySelector("meta[name='_csrf']").getAttribute("content"),
+            [document.querySelector("meta[name='_csrf_header']").getAttribute("content")] : document.querySelector("meta[name='_csrf']").getAttribute("content"),
         }
     })
-    .then((resp)=>{
-        let emailAuthResponse :EmailAuthResponse = resp.data.data;
-        window.alert(emailAuthResponse.description);
-        if(emailAuthResponse.status === Status.SUCCESS){
-            location.href = "/register";
-        }      
+        .then((resp)=>{
+            let emailAuthResponse :EmailAuthResponse = resp.data.data;
+            window.alert(emailAuthResponse.description);
+            if(emailAuthResponse.status === Status.SUCCESS){
+                location.href = "/register";
+            }
 
-    })
-    .catch((err)=>{
-        throw err;
-    })
+        })
+        .catch((err)=>{
+            throw err;
+        })
 })

@@ -1,4 +1,5 @@
 import axios from "axios";
+/*
 import Quill from "quill";
 
  
@@ -17,7 +18,7 @@ editor.getModule("toolbar").addHandler("image", imgHandler);
 function imgHandler(){
     const input = document.createElement("input");
     input.setAttribute("type","file");
-    input.setAttribute("accept","images/*")
+    input.setAttribute("accept","images/!*")
     input.setAttribute("hidden","true");
     input.click();
     input.addEventListener("change",()=>{
@@ -56,4 +57,4 @@ submitBtn.addEventListener("click",()=>{
         })
         .then((res)=>console.log(res))
         .catch((err) => {console.log(err); throw err})
-})
+})*/

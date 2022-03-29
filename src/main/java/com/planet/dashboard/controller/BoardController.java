@@ -28,7 +28,7 @@ public class BoardController {
 
     @GetMapping
     public String getBoardList(@RequestParam Integer pageNum , Model model ){
-        model.addAttribute("boards",boardService.getBoardsSortedByrCreatedAt(pageNum));
+//        model.addAttribute("boards",boardService.getBoardsSortedByrCreatedAt(pageNum));
         return "board";
     }
 

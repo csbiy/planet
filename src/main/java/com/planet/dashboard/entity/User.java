@@ -35,15 +35,26 @@ public class User extends BaseEntity {
     @OneToMany
     private List<Board> boards = new ArrayList<>();
 
-    public static User createUser(RegisterForm registerForm , String email){
+    private static UserBuilder createUser(String encodedPw , String email){
         return User.builder()
                 .email(email)
-                .password(registerForm.getFirstPw())
+                .password(encodedPw);
+    }
+
+    public static User createAdminUser(String encodedPw , String email){
+        return createUser(encodedPw,email)
+                .role(Role.ROLE_ADMIN)
+                .build();
+    }
+
+    public static User createNormalUser(String encodedPw , String email){
+        return createUser(encodedPw,email)
+                .role(Role.ROLE_USER)
                 .build();
     }
 
     @Builder
-    public User(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, String email, String password, String nickName ,List<Board> boards) {
+    public User(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, String email, String password, String nickName ,List<Board> boards , Role role) {
         super(createdAt, updatedAt, deletedAt, deletedBy);
         this.email = email;
         this.password = password;
