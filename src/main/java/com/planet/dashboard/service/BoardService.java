@@ -7,19 +7,10 @@ import com.planet.dashboard.entity.AttachedFile;
 import com.planet.dashboard.entity.Board;
 import com.planet.dashboard.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -48,4 +39,15 @@ public class BoardService {
     }
 
 
+    public List<BoardDto> getBoardsSortedByrCreatedAt(int pageNum) {
+        return boardRepository.getBoardsSortedByCreatedAt(pageNum, PAGE_SIZE);
+    }
+
+    public Integer getNumOfBoards(){
+        Integer size = boardRepository.getNumOfBoards();
+        if(size%PAGE_SIZE != 0){
+            return size/PAGE_SIZE+1;
+        }
+        return size == 0 ? 1 : size/PAGE_SIZE;
+    }
 }

@@ -2,9 +2,7 @@ package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
 import com.planet.dashboard.controller.request.dto.BoardForm;
-import com.planet.dashboard.controller.response.dto.AttachedFileDto;
 import com.planet.dashboard.entity.AttachedFile;
-import com.planet.dashboard.entity.Board;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.service.BoardService;
 import com.planet.dashboard.service.FileHandler;
@@ -28,7 +26,8 @@ public class BoardController {
 
     @GetMapping
     public String getBoardList(@RequestParam Integer pageNum , Model model ){
-//        model.addAttribute("boards",boardService.getBoardsSortedByrCreatedAt(pageNum));
+        model.addAttribute("boards",boardService.getBoardsSortedByrCreatedAt(pageNum));
+        model.addAttribute("boardSize" , boardService.getNumOfBoards());
         return "board";
     }
 

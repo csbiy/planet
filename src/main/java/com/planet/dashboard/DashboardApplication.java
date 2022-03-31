@@ -1,5 +1,6 @@
 package com.planet.dashboard;
 
+import com.planet.dashboard.entity.Board;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.CommentRepository;
 import com.planet.dashboard.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
+import java.util.UUID;
 
 
 @SpringBootApplication
@@ -35,6 +37,14 @@ public class DashboardApplication {
 	@Profile("dev")
 	public void addTestUser(){
 		userRepository.save(User.createAdminUser(passwordEncoder.encode("1234"),"test@naver.com"));
+	}
+
+	@PostConstruct
+	@Profile("dev")
+	public void addTestBoard(){
+		for(int i = 0; i< 63 ; i++){
+			boardRepository.save(Board.createBoard("kcs","hello", UUID.randomUUID().toString().substring(0,20)));
+		}
 	}
 
 

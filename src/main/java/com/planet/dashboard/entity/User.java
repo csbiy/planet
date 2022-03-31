@@ -1,17 +1,18 @@
 package com.planet.dashboard.entity;
 
-import com.planet.dashboard.controller.request.dto.RegisterForm;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@Table(name = "TB_USER")
 public class User extends BaseEntity {
 
 

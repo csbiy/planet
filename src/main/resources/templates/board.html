@@ -32,7 +32,7 @@
                             </tr>
                           </thead>
                           <tbody >
-                            <tr th:each=" board : ${boards.getContent()}" class="board">
+                            <tr th:each=" board : ${boards}" class="board">
                                 <td> <a th:href="@{board/{seq}(seq=${board.seq})}"  th:text="${board.title}"></a></td>
                               <td th:text="${board.createdBy}"></td>
                               <td th:text="${board.viewNum}"></td>
@@ -45,7 +45,7 @@
 
                 <div class="row position-relative mt-5">
                     <div class="position-absolute absolute-center" >
-                        <a class="btn btn-primary mr-1" th:each=" pageNum : ${ #numbers.sequence(1,boards.getTotalPages())}" th:href="@{/board(pageNum=${pageNum})}" role="button" th:text="${pageNum}"></a>
+                        <a class="btn btn-primary mr-1" th:each=" pageNum : ${ #numbers.sequence(1,boardSize)}" th:href="@{/board(pageNum= ${pageNum} -1 )}" role="button" th:text="${pageNum}"></a>
                     </div>
                 </div>
                 <!-- 실질적인 내용 -->

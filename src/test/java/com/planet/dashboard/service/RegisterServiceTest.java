@@ -37,11 +37,8 @@ class RegisterServiceTest {
         // when
         User registeredUser = registerService.register(registerForm, mockHttpSession);
         //then
-<<<<<<< HEAD
         Optional<User> foundUser = userRepository.findById(registeredUser.getSeq());
-=======
-        Optional<User> foundUser = userRepository.findByEmail(email);
->>>>>>> feat-01
+
         Assertions.assertThat(foundUser.isPresent()).isTrue();
         Assertions.assertThat(foundUser.get().getPassword()).isEqualTo(password);
     }
