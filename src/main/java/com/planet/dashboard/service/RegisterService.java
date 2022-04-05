@@ -21,7 +21,7 @@ public class RegisterService {
 
    public User register(RegisterForm registerForm, HttpSession session){
        EmailSession emailSession = (EmailSession) SessionManager.getSession(session, SessionManager.EMAIL_AUTH);
-       return userRepository.save(User.createNormalUser(passwordEncoder.encode(registerForm.getFirstPw()), emailSession.getEmail()));
+       return userRepository.save(User.createNormalUser(passwordEncoder.encode(registerForm.getFirstPw()), emailSession.getEmail(),registerForm.getNickName()));
    }
 
 

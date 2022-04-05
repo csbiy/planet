@@ -1,13 +1,14 @@
 // import module
 import axios from "axios";
-import { config } from "webpack";
-import { EmailAuthResponse , Status  } from "./types";
+import { EmailAuthResponse  , Status  } from "./types";
+import { addCsrfAttribute } from "./csrf";
 
 // dom 
-const emailSendBtn      = document.querySelector("#email-send-btn") as HTMLButtonElement;
-const authValBtn        = document.querySelector("#auth-validate-btn") as HTMLButtonElement; 
-const emailInput        = document.querySelector("#email") as HTMLInputElement;
-const authInput         = document.querySelector("#auth") as HTMLInputElement;
+const emailSendBtn        = document.querySelector("#email-send-btn") as HTMLButtonElement;
+const authValBtn          = document.querySelector("#auth-validate-btn") as HTMLButtonElement; 
+const emailInput          = document.querySelector("#email") as HTMLInputElement;
+const authInput           = document.querySelector("#auth") as HTMLInputElement;
+
 
 
 function getCookie(name :string) :string {
@@ -17,6 +18,7 @@ function getCookie(name :string) :string {
         return parts.pop().split(";").shift();
     }
 }
+
 
 emailSendBtn.addEventListener("click",()=>{
     axios.get("/api/register/email-send?email=" + emailInput.value)
@@ -36,9 +38,7 @@ authValBtn.addEventListener("click",()=>{
         auth : authInput.value
 
     },{
-        headers :{
-            [document.querySelector("meta[name='_csrf_header']").getAttribute("content")] : document.querySelector("meta[name='_csrf']").getAttribute("content"),
-        }
+        headers : addCsrfAttribute({})
     })
         .then((resp)=>{
             let emailAuthResponse :EmailAuthResponse = resp.data.data;

@@ -35,9 +35,4 @@ public class LoginServiceImpl implements LoginService{
         request.getSession(false).invalidate();
     }
 
-
-    public boolean isMember(LoginForm loginForm) {
-        Optional<User> foundUser = userRepository.findByEmail(loginForm.getEmail());
-       return foundUser.isPresent() && foundUser.get().getPassword().equals(loginForm.getPassword());
-    }
 }

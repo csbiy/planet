@@ -11,23 +11,23 @@ public class ValidationResponse implements Serializable {
 
     private Status status;
 
-    public void setSuccess(){
-        description = "인증에 성공하였습니다.";
-        status = Status.SUCCESS;
+    public void setSuccess(String description){
+        this.status = Status.SUCCESS;
+        this.description = description;
     }
-    public void setFail(){
-        description = "인증에 실패하였습니다.";
-        status = Status.FAIL;
-    }
-
-    public void setWaiting(){
-        description = "인증 대기상태입니다.";
-        status = Status.WAITING_AUTHORIZATION;
+    public void setFail(String description){
+        this.status = Status.FAIL;
+        this.description = description;
     }
 
-    public void setDuplicate(){
-        description = "이미 존재하는 회원입니다.";
-        status = Status.DUPLICATE_MEMBER;
+    public void setWaiting(String description){
+        this.status = Status.WAITING_AUTHORIZATION;
+        this.description = description;
+    }
+
+    public void setDuplicate(String description){
+        this.status = Status.DUPLICATE_MEMBER;
+        this.description = description;
     }
 
     public enum Status{

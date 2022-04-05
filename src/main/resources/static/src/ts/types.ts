@@ -3,6 +3,11 @@ interface EmailAuthResponse {
     status : Status
 }
 
+interface NickNameResponse {
+    description:string,
+    status:Status,
+}
+
 enum Status{
     WAITING_AUTHORIZATION = "WAITING_AUTHORIZATION",
     SUCCESS = "SUCCESS",
@@ -10,4 +15,4 @@ enum Status{
     DUPLICATE_MEMBER ="DUPLICATE_MEMBER"
 }
 
-export {EmailAuthResponse,Status}
+export {EmailAuthResponse,NickNameResponse,Status}

@@ -16,41 +16,25 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">main</h1>
         </div>
-
-        <!-- 실질적인 내용 -->
-        <div th:object="${board}">
+        <form th:object="${boardForm}" method="POST" th:action="@{/board}">
           <div class="row d-flex">
             <div>
-              <!--  제목 : [댓글개수] 형태로 구상중임 -->
-              <p>제목 : <span th:text="  |*{title} [ *{comments?.size()} ]| "></span></p>
-              <p>작성일시 : <span th:text="*{createdAt}"></span></p>
-            </div>
-            <div>
-              <p>작성자 : <span th:text="*{createdBy}"></span></p>
-              <p>조회수 : <span th:text="*{viewNum}"></span></p>
+              <label th:for="title">제목</label>
+              <input type="text" th:field="*{title}"/>
+              <p>작성일시 : <span th:text="${#dates.format(#dates.createNow(), 'yyyy년 dd일 MM월 HH:mm')}"></span></p>
             </div>
           </div>
           <div class="row">
-            <p><span th:text="*{content}"></span></p>
+            <label th:for="content">내용</label>
+            <textarea th:field="*{content}" cols="10" rows="20"/>
           </div>
           <div class="row">
-           <p> like : <span th:text="*{likeNum}"></span></p>
-           <p> dislike : <span th:text="*{dislikeNum}"></span></p>
+            <div style="margin: 40px auto 0;">
+              <button class="btn btn-primary mr-1" type="submit">작성</button>
+              <button class="btn btn-primary mr-1" type="button">취소</button>
+            </div>
           </div>
-        </div>
-
-          <!-- 댓글 리스트 -->
-        <div class="row">
-          <div th:each=" comment : ${board.comments}" >
-            <span th:text="${comment.nickName}"></span>
-            <span th:text="${comment.createdAt}"></span>
-            <span th:text="${comment.content}"></span>
-            <span th:text="${comment.likeNum}"></span>
-            <span th:text="${comment.dislikeNum}"></span>
-          </div>
-       </div>
-      <!-- 실질적인 내용 -->
-      <!-- /.container-fluid -->
+        </form>
     </div>
     <!-- End of Main Content -->
     <!-- Footer -->

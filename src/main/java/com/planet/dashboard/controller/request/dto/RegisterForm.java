@@ -14,6 +14,10 @@ public class RegisterForm {
 
 
     @NotBlank
+    @Size(min = 1,max = 10)
+    private String nickName;
+
+    @NotBlank
     @Size(min = 6,max = 20)
     private String firstPw;
 

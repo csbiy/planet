@@ -1,19 +1,13 @@
 package com.planet.dashboard.controller;
 
-import com.planet.dashboard.SessionManager;
 import com.planet.dashboard.controller.request.dto.BoardForm;
-import com.planet.dashboard.entity.AttachedFile;
-import com.planet.dashboard.entity.User;
 import com.planet.dashboard.service.BoardService;
-import com.planet.dashboard.service.FileHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,7 +16,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-    private final FileHandler fileHandler;
+
 
     @GetMapping
     public String getBoardList(@RequestParam Integer pageNum , Model model ){
@@ -38,11 +32,14 @@ public class BoardController {
     }
 
     @PostMapping
-    public String createBoard(BoardForm boardForm , HttpSession session){
-        log.info("boardForm : {} , {} , file inside form : {} ", boardForm.getTitle(),boardForm.getContent(), boardForm.getFiles());
-        User user = (User) SessionManager.getSession(session, SessionManager.LOGIN_ID);
-        List<AttachedFile> attachedFiles = fileHandler.saveFile(boardForm.getFiles() , user);
-        boardService.createBoardWithFile(boardForm, user.getNickName() , attachedFiles);
-        return "board";
+    public String createBoard(BoardForm boardForm , Authentication authentication){
+        boardService.createBoard(boardForm, boardService.findNickName(authentication));
+        return "redirect:/board?pageNum=0";
+    }
+
+    @GetMapping("/form")
+    public String getBoardWriteForm(Model model){
+        model.addAttribute("boardForm",new BoardForm());
+        return "boardWrite";
     }
 }

@@ -48,9 +48,10 @@ public class User extends BaseEntity {
                 .build();
     }
 
-    public static User createNormalUser(String encodedPw , String email){
+    public static User createNormalUser(String encodedPw , String email , String nickName){
         return createUser(encodedPw,email)
                 .role(Role.ROLE_USER)
+                .nickName(nickName)
                 .build();
     }
 

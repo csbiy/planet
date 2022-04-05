@@ -1,12 +1,18 @@
 package com.planet.dashboard.service;
 
+import com.planet.dashboard.auth.PrincipalDetails;
 import com.planet.dashboard.controller.request.dto.BoardForm;
 import com.planet.dashboard.controller.response.dto.BoardDetailDto;
 import com.planet.dashboard.controller.response.dto.BoardDto;
-import com.planet.dashboard.entity.AttachedFile;
 import com.planet.dashboard.entity.Board;
+import com.planet.dashboard.entity.User;
+import com.planet.dashboard.repository.UserRepository;
 import com.planet.dashboard.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class BoardService {
 
     private static final int PAGE_SIZE = 20;
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public BoardDetailDto findById(Long id){
@@ -32,12 +40,6 @@ public class BoardService {
     public Board createBoard(BoardForm boardForm , String nickName) {
         return boardRepository.save( Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent()));
     }
-    public Board createBoardWithFile(BoardForm boardForm , String nickName , List<AttachedFile> attachedFiles) {
-        Board board = Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent());
-        attachedFiles.stream().forEach(board::addFile);
-        return boardRepository.save(board);
-    }
-
 
     public List<BoardDto> getBoardsSortedByrCreatedAt(int pageNum) {
         return boardRepository.getBoardsSortedByCreatedAt(pageNum, PAGE_SIZE);
@@ -50,4 +52,18 @@ public class BoardService {
         }
         return size == 0 ? 1 : size/PAGE_SIZE;
     }
+
+    public String findNickName(Authentication authentication) {
+        String nickName = null;
+        if(authentication instanceof UserDetails){
+            PrincipalDetails userDetails = (PrincipalDetails) authentication;
+            nickName = userDetails.getUser().getNickName();
+        }else if(authentication instanceof UsernamePasswordAuthenticationToken){
+            UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
+            Optional<User> foundUser = userRepository.findByEmail(token.getName());
+            nickName = foundUser.get().getNickName();
+        }
+        return nickName;
+    }
+
 }
