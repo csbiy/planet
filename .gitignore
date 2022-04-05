@@ -10,8 +10,7 @@ src/main/resources/static/js/
 src/main/resources/static/scss/
 src/main/resources/static/vendor/
 src/main/resources/static/src/node_modules/
-
-
+document/
 ### STS ###
 .apt_generated
 .classpath
