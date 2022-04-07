@@ -1,5 +1,6 @@
 package com.planet.dashboard.controller;
 
+import com.planet.dashboard.SessionManager;
 import com.planet.dashboard.controller.request.dto.EmailForm;
 import com.planet.dashboard.controller.request.dto.RegisterForm;
 import com.planet.dashboard.entity.User;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -42,9 +44,15 @@ public class RegisterController  {
     }
 
     @PostMapping
-    public String register(@Validated @ModelAttribute RegisterForm src , BindingResult bindingResult , HttpServletRequest request , Model model) {
+    public String register(@Validated @ModelAttribute RegisterForm src , BindingResult bindingResult , HttpServletRequest request , Model model, HttpSession session) {
+
+        if(SessionManager.getSession(session, SessionManager.NICKNAME_AUTH) == null){
+            model.addAttribute("isNickNameValid",true);
+            return "register";
+        }
         if(!isSamePw(src.getFirstPw(),src.getSecondPw())){
             model.addAttribute("isDiffPw",true);
+            return "register";
         }
         if(bindingResult.hasErrors()){
             return "register";

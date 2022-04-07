@@ -19,6 +19,7 @@
       <button type="button" id="dup-check-btn">중복검사</button>
     </div>
     <div th:errors="*{nickName}"></div>
+    <div th:if="${isNickNameValid}" th:text="#{require.duplicateCheck.nickname}"></div>
   </div>
 
   <label th:for="firstPw">비밀번호</label>

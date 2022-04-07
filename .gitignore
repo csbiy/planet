@@ -4,7 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-!src/main/resources/application.yaml
+!src/main/resources/application.yaml3
 src/main/resources/static/css/
 src/main/resources/static/js/
 src/main/resources/static/scss/
@@ -22,7 +22,6 @@ document/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -38,6 +37,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+
 
 ### VS Code ###
 .vscode/

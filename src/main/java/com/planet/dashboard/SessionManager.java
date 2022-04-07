@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 public enum SessionManager {
 
     LOGIN_ID("ADMIN_ID"),
-    EMAIL_AUTH("EMAIL_KEY");
+    EMAIL_AUTH("EMAIL_KEY"),
+    NICKNAME_AUTH("NICKNAME_KEY")
+    ;
 
     private static final int SECOND = 60;
     private final String id;
