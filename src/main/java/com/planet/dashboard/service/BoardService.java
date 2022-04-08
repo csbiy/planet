@@ -29,14 +29,15 @@ public class BoardService {
     private final UserRepository userRepository;
 
     @Transactional
-    public BoardDetailDto findById(Long id){
+    public BoardDetailDto readBoard(Long id){
         Optional<Board> foundBoard = boardRepository.findById(id);
         if(foundBoard.isPresent()){
-           return new BoardDetailDto(foundBoard.get());
+            foundBoard.get().addViewNum();
+            return new BoardDetailDto(foundBoard.get());
         }
         return null;
     }
-    @Transactional
+
     public Board createBoard(BoardForm boardForm , String nickName) {
         return boardRepository.save( Board.createBoard(nickName, boardForm.getTitle(), boardForm.getContent()));
     }

@@ -1,8 +1,12 @@
 package com.planet.dashboard;
 
 import com.planet.dashboard.entity.Board;
+import com.planet.dashboard.entity.CrawlingComponent;
+import com.planet.dashboard.entity.CrawlingSite;
 import com.planet.dashboard.entity.User;
 import com.planet.dashboard.repository.CommentRepository;
+import com.planet.dashboard.repository.CrawlingComponentRepository;
+import com.planet.dashboard.repository.CrawlingSiteRepository;
 import com.planet.dashboard.repository.UserRepository;
 import com.planet.dashboard.repository.board.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,10 @@ public class DashboardApplication {
 	BoardRepository boardRepository;
 	@Autowired
 	CommentRepository commentRepository;
+	@Autowired
+	CrawlingComponentRepository crawlingComponentRepository;
+	@Autowired
+	CrawlingSiteRepository crawlingSiteRepository;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -45,6 +53,20 @@ public class DashboardApplication {
 		for(int i = 0; i< 63 ; i++){
 			boardRepository.save(Board.createBoard("kcs","hello", UUID.randomUUID().toString().substring(0,20)));
 		}
+	}
+
+	@PostConstruct
+	@Profile("dev")
+	public void addCrawlingSite(){
+		CrawlingSite site = CrawlingSite.builder()
+				.name("인프런")
+				.path("https://www.inflearn.com/community/studies")
+				.build();
+
+		CrawlingComponent.builder()
+						.name("제목")
+
+		crawlingSiteRepository.save(site);
 	}
 
 

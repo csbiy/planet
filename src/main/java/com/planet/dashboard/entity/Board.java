@@ -36,6 +36,10 @@ public class Board extends BaseEntity {
 
     private String createdBy;
 
+    public void addViewNum(){
+        this.viewNum++;
+    }
+
     @OneToMany
     private List<Comment> comments = new ArrayList<>();
 

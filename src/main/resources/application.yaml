@@ -19,6 +19,7 @@ file:
 
 logging:
   level:
+    root: info
     org:
       hibernate:
         type:
