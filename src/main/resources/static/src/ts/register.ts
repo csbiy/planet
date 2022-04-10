@@ -1,6 +1,6 @@
 import axios from "axios";
-import { addCsrfAttribute } from "./csrf";
-import {   NickNameResponse , Status  } from "./types";
+import {addCsrfAttribute} from "./csrf";
+import {NickNameResponse} from "./types";
 
 const nickNameInput       = document.querySelector("#nickName") as HTMLInputElement;
 const nickNameDupCheckBtn = document.querySelector("#dup-check-btn") as HTMLButtonElement;

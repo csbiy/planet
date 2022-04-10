@@ -8,7 +8,7 @@ spring:
       matching-strategy: ant_path_matcher
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
@@ -24,7 +24,9 @@ logging:
       hibernate:
         type:
           descriptor:
-            sql: trace
+            sql: OFF
+
+
 
 ## port & login session id 만료시간 설정
 server:
@@ -35,6 +37,14 @@ server:
       timeout:
         1800s
 
+schedule:
+  year: "*"
+  month: "*"
+  day: "*"
+  dayOfWeek: "?"
+  hour: "*"
+  minute: "51"
+  second: "1"
 ## email 인증 관련 설정
 smtp:
   platform: naver

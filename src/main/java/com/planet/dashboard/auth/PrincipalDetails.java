@@ -1,6 +1,5 @@
 package com.planet.dashboard.auth;
 
-import com.planet.dashboard.controller.request.dto.LoginForm;
 import com.planet.dashboard.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

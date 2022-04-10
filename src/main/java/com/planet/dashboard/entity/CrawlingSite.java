@@ -4,10 +4,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,21 +23,17 @@ public class CrawlingSite extends BaseEntity{
 
     private String path;
 
-    @OneToMany(fetch = FetchType.EAGER )
-    private List<CrawlingComponent> components = new ArrayList();
+    private String cssPath; //  study 공고 게시글
 
 
-    public void addComponent(CrawlingComponent crawlingComponent){
-        this.components.add(crawlingComponent);
-    }
 
     @Builder
-    public CrawlingSite(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, Integer id, String name, String path) {
+    public CrawlingSite(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt, String deletedBy, Integer id, String name, String path, String cssPath ) {
         super(createdAt, updatedAt, deletedAt, deletedBy);
         this.id = id;
         this.name = name;
         this.path = path;
+        this.cssPath = cssPath;
     }
-
 }
 

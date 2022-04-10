@@ -16,6 +16,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -57,16 +59,43 @@ public class DashboardApplication {
 
 	@PostConstruct
 	@Profile("dev")
+	@Transactional
 	public void addCrawlingSite(){
+
+
 		CrawlingSite site = CrawlingSite.builder()
 				.name("인프런")
-				.path("https://www.inflearn.com/community/studies")
+				.path("https://www.inflearn.com")
+				.cssPath(".question-container a")
 				.build();
 
-		CrawlingComponent.builder()
-						.name("제목")
+		CrawlingComponent title = CrawlingComponent.builder()
+				.name("title")
+				.cssPath(".header__title h1")
+				.site(site)
+				.build();
+
+		CrawlingComponent userName = CrawlingComponent.builder()
+				.name("user")
+				.cssPath(".header__sub-title .user-name")
+				.site(site)
+				.build();
+
+		CrawlingComponent createdAt = CrawlingComponent.builder()
+				.name("createdAt")
+				.cssPath(".header__sub-title .sub-title__created-at")
+				.site(site)
+				.build();
+
+		CrawlingComponent content = CrawlingComponent.builder()
+				.name("content")
+				.cssPath(".content__body.markdown-body")
+				.site(site)
+				.build();
 
 		crawlingSiteRepository.save(site);
+		crawlingComponentRepository.saveAll(List.of(title,userName,createdAt,content));
+
 	}
 
 

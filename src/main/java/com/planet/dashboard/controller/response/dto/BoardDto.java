@@ -3,7 +3,6 @@ package com.planet.dashboard.controller.response.dto;
 import com.planet.dashboard.entity.Board;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.domain.Page;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;

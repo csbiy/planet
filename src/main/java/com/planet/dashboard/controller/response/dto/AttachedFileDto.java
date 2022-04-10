@@ -1,7 +1,6 @@
 package com.planet.dashboard.controller.response.dto;
 
 import com.planet.dashboard.entity.AttachedFile;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter

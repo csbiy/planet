@@ -1,7 +1,7 @@
 // import module
 import axios from "axios";
-import { EmailAuthResponse  , Status  } from "./types";
-import { addCsrfAttribute } from "./csrf";
+import {EmailAuthResponse, Status} from "./types";
+import {addCsrfAttribute} from "./csrf";
 
 // dom 
 const emailSendBtn        = document.querySelector("#email-send-btn") as HTMLButtonElement;

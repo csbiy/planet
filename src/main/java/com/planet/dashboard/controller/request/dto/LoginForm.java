@@ -1,9 +1,7 @@
 package com.planet.dashboard.controller.request.dto;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 @Getter

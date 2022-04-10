@@ -1,11 +1,11 @@
 package com.planet.dashboard.controller;
 
 import com.planet.dashboard.SessionManager;
+import com.planet.dashboard.controller.request.dto.EmailValidationRequest;
 import com.planet.dashboard.controller.request.dto.NickNameValidationRequest;
+import com.planet.dashboard.controller.response.dto.ValidationResponse;
 import com.planet.dashboard.email.EmailHandler;
 import com.planet.dashboard.email.EmailSession;
-import com.planet.dashboard.controller.request.dto.EmailValidationRequest;
-import com.planet.dashboard.controller.response.dto.ValidationResponse;
 import com.planet.dashboard.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

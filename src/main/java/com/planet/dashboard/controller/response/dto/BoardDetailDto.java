@@ -1,11 +1,9 @@
 package com.planet.dashboard.controller.response.dto;
 
 import com.planet.dashboard.entity.Board;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
