@@ -29,16 +29,20 @@ public class CrawlingService implements CrawlStudyInfo , Runnable {
     public void retrieveStudyInfo(int pageNum) throws IOException {
         List<CrawlingSite> sites = crawlingSiteRepository.findAll();
         for (CrawlingSite site : sites) {
-
             Document doc = Jsoup.connect(site.getPath() + "/community/studies?status=unrecruited&page="+pageNum ).get();
             Elements elements = doc.select(site.getCssPath());
+            int size = 0;
                 for (Element element : elements) {
                     if(isYesterDay(element)){
+                        size++;
                         String id = getBoardId(element.attr("href"));
                         Document document = Jsoup.connect(site.getPath() + "/studies/" + id).get();
                         parseDocument(document,id);
                     }
                 }
+            // 해당 페이지는 전부 하루전에 갱신되었음. 두번째 페이지 탐색 필요
+            if(size == elements.size()){
+                retrieveStudyInfo(pageNum+1);
             }
         }
     }
@@ -75,7 +79,7 @@ public class CrawlingService implements CrawlStudyInfo , Runnable {
     public void run() {
         log.info("crawling batch job 시작");
         try {
-            retrieveStudyInfo();
+            retrieveStudyInfo(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

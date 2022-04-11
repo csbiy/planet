@@ -43,7 +43,7 @@ schedule:
   day: "*"
   dayOfWeek: "?"
   hour: "*"
-  minute: "51"
+  minute: "13"
   second: "1"
 ## email 인증 관련 설정
 smtp:
